@@ -2,8 +2,8 @@ const fs = require( 'fs' );
 const path = require( 'path' );
 
 // TODO : get source and destination directory from user 
-const moveFrom = ""; 
-const moveTo = ""; 
+const moveFrom = "source"; 
+const moveTo = "destination"; 
 
 copyFiles(moveFrom, moveTo);
 
@@ -27,13 +27,9 @@ async function copyFiles(moveFrom, moveTo){
             else if( stat.isDirectory() ){   
                 var newTarget = moveTo + "/" +path.basename(fromPath);
                 // create a new directory with the same name in the target folder
-                await fs.promises.mkdir( newTarget, { recursive: true }, (err) => {
-                    if (err)  console.log( "Error occured while creating a directory." + err );
-                });
+                await fs.promises.mkdir(newTarget);
                 // copy files recursively
-                await copyFiles(fromPath, newTarget, (err) => {
-                    if (err)  console.log( "Error occured while copying files." + err );
-                });
+                await copyFiles(fromPath, newTarget);
             }
             console.log( "Moved '%s' successfully", path.basename(fromPath));
         }
