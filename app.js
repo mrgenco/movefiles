@@ -1,9 +1,9 @@
 const fs = require( 'fs' );
 const path = require( 'path' );
+const prompt = require('prompt-sync')({sigint: true});
 
-// TODO : get source and destination directory from user 
-const moveFrom = "source"; 
-const moveTo = "destination"; 
+const moveFrom = prompt('Enter a source directory : ');
+const moveTo = prompt('Enter a destination directory : '); 
 
 copyFiles(moveFrom, moveTo);
 
